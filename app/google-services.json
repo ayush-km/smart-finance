@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "519379412377",
+    "project_id": "smart-finance-app-4c838",
+    "storage_bucket": "smart-finance-app-4c838.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519379412377:android:187a662ae11da644e25f08",
+        "android_client_info": {
+          "package_name": "com.ayushkm.smartfinance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "519379412377-m7pdfsus3a01lkp3ammdm7q59fuvj62m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdZ-lR_7rPyqdxG8gBQ3EP7DwRu0Y946I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "519379412377-m7pdfsus3a01lkp3ammdm7q59fuvj62m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

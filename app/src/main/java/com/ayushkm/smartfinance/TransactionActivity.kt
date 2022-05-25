@@ -9,6 +9,7 @@ import com.ayushkm.smartfinance.model.ExpenditureCategory
 import com.ayushkm.smartfinance.model.IncomeCategory
 import com.ayushkm.smartfinance.model.Transaction
 import com.ayushkm.smartfinance.model.TransactionRepository.addTransaction
+import com.ayushkm.smartfinance.model.TransactionRepository.updateTransaction
 
 class TransactionActivity : AppCompatActivity() {
     private lateinit var typeRadioGroup: RadioGroup
@@ -28,10 +29,14 @@ class TransactionActivity : AppCompatActivity() {
         descriptionEditText = findViewById(R.id.et_description)
         saveButton = findViewById(R.id.btn_save)
 
+        var passedTransaction: Transaction? = null
+
         intent.extras?.let {
-            val value = it.getSerializable("TRANSACTION") as Transaction
-            initializeUIFromExtras(value)
-        } ?: updateSpinner(ExpenditureCategory.values().map { it.toString() }.toTypedArray())
+            passedTransaction = it.getSerializable("TRANSACTION") as Transaction
+            initializeUIFromExtras(passedTransaction!!)
+        } ?: updateSpinner(
+            ExpenditureCategory.values().map { it.toString() }.toTypedArray()
+        )
 
         typeRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             val values: Array<String> = when (checkedId) {
@@ -53,9 +58,34 @@ class TransactionActivity : AppCompatActivity() {
             val descString = descriptionEditText.text.toString()
             val description = if (descString.isNotBlank()) descString else ""
 
-            val transaction = Transaction(type, amount, category, description)
 
-            addTransaction(transaction, this@TransactionActivity)
+
+            when (saveButton.text.toString()) {
+                "Update Transaction" -> {
+                    val oldTransaction = passedTransaction
+                    val newTransaction = Transaction(
+                        type = type,
+                        amount = amount,
+                        category = category,
+                        description = description,
+                    )
+                    updateTransaction(
+                        oldTransaction = oldTransaction!!,
+                        newTransaction = newTransaction,
+                        this@TransactionActivity
+                    )
+                }
+                else -> {
+                    val transaction = Transaction(
+                        type = type,
+                        amount = amount,
+                        category = category,
+                        description = description
+                    )
+                    addTransaction(transaction, this@TransactionActivity)
+                }
+            }
+
             finish()
         }
     }

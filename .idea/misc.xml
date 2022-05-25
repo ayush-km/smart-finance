@@ -11,15 +11,19 @@
         <entry key="..\:/Users/ayush/Desktop/Android/SmartFinance/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/ayush/Desktop/Android/SmartFinance/app/src/main/res/drawable/logo.xml" value="0.1" />
         <entry key="..\:/Users/ayush/Desktop/Android/SmartFinance/app/src/main/res/drawable/splash_background.xml" value="0.1945" />
+        <entry key="..\:/Users/ayush/Desktop/Android/SmartFinance/app/src/main/res/layout/activity_greeting.xml" value="0.2" />
         <entry key="..\:/Users/ayush/Desktop/Android/SmartFinance/app/src/main/res/layout/activity_login.xml" value="0.17074275362318841" />
-        <entry key="..\:/Users/ayush/Desktop/Android/SmartFinance/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/ayush/Desktop/Android/SmartFinance/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/ayush/Desktop/Android/SmartFinance/app/src/main/res/layout/activity_splash_screen.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/ayush/Desktop/Android/SmartFinance/app/src/main/res/layout/activity_transaction.xml" value="0.22" />
+        <entry key="..\:/Users/ayush/Desktop/Android/SmartFinance/app/src/main/res/layout/person_item_view.xml" value="0.19895833333333332" />
+        <entry key="..\:/Users/ayush/Desktop/Android/SmartFinance/app/src/main/res/layout/transaction_item_view.xml" value="0.25" />
         <entry key="..\:/Users/ayush/Desktop/Android/SmartFinance/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/ayush/Desktop/Android/SmartFinance/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

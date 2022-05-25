@@ -27,7 +27,6 @@ class TransactionViewHolder(private val view: View) : RecyclerView.ViewHolder(vi
                 R.color.expenditure
             )
         }
-        //view.setBackgroundColor(color)
         amountTextView.setTextColor(color)
         amountTextView.text = view.context.getString(R.string.amount, transaction.amount)
         categoryTextView.text = transaction.category

@@ -27,24 +27,6 @@ class MainActivity : AppCompatActivity() {
 
         addTransactionButton.setOnClickListener {
             startActivity(Intent(this@MainActivity, TransactionActivity::class.java))
-            /*transactionRepository.addTransaction(
-                Transaction(
-                    TransactionType.EXPENDITURE,
-                    Random.nextInt(100),
-                    ExpenditureCategory.MISC.toString(),
-                    "Nestle Juice"
-                ),
-                this@MainActivity
-            )
-            transactionRepository.addTransaction(
-                Transaction(
-                    TransactionType.INCOME,
-                    Random.nextInt(100),
-                    IncomeCategory.SALARY.toString(),
-                    "Just The Monthly Pay"
-                ),
-                this@MainActivity
-            )*/
         }
 
 

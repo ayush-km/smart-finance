@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -38,14 +39,37 @@ object TransactionRepository {
             }
         }
 
-    fun deleteTransaction(transaction: Transaction) {
-        TODO("Not yet implemented")
-    }
+    fun deleteTransaction(transaction: Transaction, context: Context) =
+        CoroutineScope(Dispatchers.IO).launch {
+
+        }
 
 
-    fun updateTransaction(transaction: Transaction) {
-        TODO("Not yet implemented")
-    }
+    fun updateTransaction(
+        oldTransaction: Transaction,
+        newTransaction: Transaction,
+        context: Context
+    ) =
+        CoroutineScope(Dispatchers.IO).launch {
+            val transactionQuery = transactionCollectionReference
+                .whereEqualTo("amount", oldTransaction.amount)
+                .whereEqualTo("type", oldTransaction.type)
+                .whereEqualTo("category", oldTransaction.category)
+                .whereEqualTo("description", oldTransaction.description)
+                .get()
+                .await()
+
+            if (transactionQuery.documents.isNotEmpty()) {
+                transactionQuery.forEach {
+                    transactionCollectionReference.document(it.id)
+                        .set(newTransaction, SetOptions.merge()).await()
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "No Such Transaction Found!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
     fun subscribeToTransactionUpdates() {
         transactionCollectionReference

@@ -9,4 +9,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="amount">Rs. %1$d</string>
+    <string name="welcome_string">Welcome %1$s!</string>
+
+    <string name="webclient_id">519379412377-m7pdfsus3a01lkp3ammdm7q59fuvj62m.apps.googleusercontent.com</string>
 </resources>

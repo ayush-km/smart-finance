@@ -18,7 +18,7 @@ import java.io.IOException
 
 const val TAG = "TransactionRepository"
 
-class TransactionRepository {
+object TransactionRepository {
     private val transactionCollectionReference = Firebase.firestore.collection("transactions")
     private val _transactionList = MutableLiveData<List<Transaction>>()
     val transactionList: LiveData<List<Transaction>> = _transactionList
@@ -49,7 +49,7 @@ class TransactionRepository {
 
     fun subscribeToTransactionUpdates() {
         transactionCollectionReference
-            .orderBy("timestamp", Query.Direction.ASCENDING)
+            .orderBy("timestamp", Query.Direction.DESCENDING)
             .addSnapshotListener { querySnapshot, error ->
                 error?.let {
                     Log.e(TAG, it.message.toString())

@@ -1,6 +1,5 @@
 package com.ayushkm.smartfinance
 
-import TransactionType
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -8,34 +7,30 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ayushkm.smartfinance.model.ExpenditureCategory
-import com.ayushkm.smartfinance.model.IncomeCategory
 import com.ayushkm.smartfinance.model.Transaction
-import com.ayushkm.smartfinance.model.TransactionRepository
+import com.ayushkm.smartfinance.model.TransactionRepository.subscribeToTransactionUpdates
+import com.ayushkm.smartfinance.model.TransactionRepository.transactionList
 
 
 class MainActivity : AppCompatActivity() {
-    private val transactionRepository = TransactionRepository()
-
-    private lateinit var uploadDataButton: Button
+    private lateinit var addTransactionButton: Button
     private lateinit var transactionsRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        subscribeToTransactionUpdates()
 
-        transactionRepository.subscribeToTransactionUpdates()
-
-
-        uploadDataButton = findViewById(R.id.btn_upload_data)
+        addTransactionButton = findViewById(R.id.btn_add_transaction)
         transactionsRecyclerView = findViewById(R.id.rv_transactions)
 
-        uploadDataButton.setOnClickListener {
-            transactionRepository.addTransaction(
+        addTransactionButton.setOnClickListener {
+            startActivity(Intent(this@MainActivity, TransactionActivity::class.java))
+            /*transactionRepository.addTransaction(
                 Transaction(
                     TransactionType.EXPENDITURE,
-                    34,
+                    Random.nextInt(100),
                     ExpenditureCategory.MISC.toString(),
                     "Nestle Juice"
                 ),
@@ -44,12 +39,12 @@ class MainActivity : AppCompatActivity() {
             transactionRepository.addTransaction(
                 Transaction(
                     TransactionType.INCOME,
-                    55,
+                    Random.nextInt(100),
                     IncomeCategory.SALARY.toString(),
                     "Just The Monthly Pay"
                 ),
                 this@MainActivity
-            )
+            )*/
         }
 
 
@@ -67,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             transactionAdapter.submitList(it)
         }
 
-        transactionRepository.transactionList.observe(this, transactionObserver)
+        transactionList.observe(this, transactionObserver)
         // endregion recycler view stuff
     }
 }

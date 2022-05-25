@@ -41,7 +41,23 @@ object TransactionRepository {
 
     fun deleteTransaction(transaction: Transaction, context: Context) =
         CoroutineScope(Dispatchers.IO).launch {
+            val transactionQuery = transactionCollectionReference
+                .whereEqualTo("amount", transaction.amount)
+                .whereEqualTo("type", transaction.type)
+                .whereEqualTo("category", transaction.category)
+                .whereEqualTo("description", transaction.description)
+                .get()
+                .await()
 
+            if (transactionQuery.documents.isNotEmpty()) {
+                transactionQuery.forEach {
+                    transactionCollectionReference.document(it.id).delete().await()
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "No Such Transaction Found!", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
 

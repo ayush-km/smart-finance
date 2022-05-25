@@ -3,12 +3,14 @@ package com.ayushkm.smartfinance
 import TransactionType.EXPENDITURE
 import TransactionType.INCOME
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.ayushkm.smartfinance.model.ExpenditureCategory
 import com.ayushkm.smartfinance.model.IncomeCategory
 import com.ayushkm.smartfinance.model.Transaction
 import com.ayushkm.smartfinance.model.TransactionRepository.addTransaction
+import com.ayushkm.smartfinance.model.TransactionRepository.deleteTransaction
 import com.ayushkm.smartfinance.model.TransactionRepository.updateTransaction
 
 class TransactionActivity : AppCompatActivity() {
@@ -17,6 +19,7 @@ class TransactionActivity : AppCompatActivity() {
     private lateinit var amountEditText: EditText
     private lateinit var descriptionEditText: EditText
     private lateinit var saveButton: Button
+    private lateinit var deleteButton: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,12 +31,15 @@ class TransactionActivity : AppCompatActivity() {
         amountEditText = findViewById(R.id.et_amount)
         descriptionEditText = findViewById(R.id.et_description)
         saveButton = findViewById(R.id.btn_save)
+        deleteButton = findViewById(R.id.btn_delete)
+        deleteButton.visibility = View.GONE
 
         var passedTransaction: Transaction? = null
 
         intent.extras?.let {
             passedTransaction = it.getSerializable("TRANSACTION") as Transaction
             initializeUIFromExtras(passedTransaction!!)
+            setDeleteButtonClickHandler(passedTransaction!!)
         } ?: updateSpinner(
             ExpenditureCategory.values().map { it.toString() }.toTypedArray()
         )
@@ -85,7 +91,15 @@ class TransactionActivity : AppCompatActivity() {
                     addTransaction(transaction, this@TransactionActivity)
                 }
             }
+            finish()
+        }
 
+
+    }
+
+    private fun setDeleteButtonClickHandler(transaction: Transaction) {
+        deleteButton.setOnClickListener {
+            deleteTransaction(transaction, this@TransactionActivity)
             finish()
         }
     }
@@ -112,6 +126,8 @@ class TransactionActivity : AppCompatActivity() {
         amountEditText.setText(amount.toString(), TextView.BufferType.EDITABLE)
         descriptionEditText.setText(description, TextView.BufferType.EDITABLE)
         saveButton.text = "Update Transaction"
+
+        deleteButton.visibility = View.VISIBLE
     }
 
     private fun updateSpinner(values: Array<String>, selectedCategory: String = "") {

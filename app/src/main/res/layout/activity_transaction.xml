@@ -96,9 +96,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="Save Transaction"
+        android:text="Add Transaction"
         app:layout_constraintEnd_toEndOf="@+id/et_description"
         app:layout_constraintStart_toStartOf="@+id/et_description"
         app:layout_constraintTop_toBottomOf="@+id/et_description" />
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Delete Transaction"
+        app:layout_constraintEnd_toEndOf="@+id/btn_save"
+        app:layout_constraintStart_toStartOf="@+id/btn_save"
+        app:layout_constraintTop_toBottomOf="@+id/btn_save" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
